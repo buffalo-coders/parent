@@ -48,16 +48,6 @@ pipeline {
       }
     }
 
-    stage ('Maven Deployment') {
-      when {
-        branch 'master'
-      }
-
-      steps {
-        sh "mvn $MVN_OPTS -Dmaven.test.skip=true -DskipTests=true clean deploy"
-      }
-    }
-
     stage ('Post Build Cleanup') {
       steps {
         sh "mvn $MVN_OPTS clean"
