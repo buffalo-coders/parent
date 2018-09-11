@@ -40,6 +40,7 @@ pipeline {
       post {
         always {
           archive '**/target/*.jar'
+          archive '**/target/*.pom'
           archive '**/target/*.war'
           junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
           warnings consoleParsers: [[parserName: 'Java Compiler (javac)'], [parserName: 'Maven']]
