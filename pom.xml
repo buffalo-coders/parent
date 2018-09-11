@@ -114,6 +114,13 @@ under the License.
         <version>1.2</version>
         <executions>
           <execution>
+            <id>display-info</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>display-info</goal>
+            </goals>
+          </execution>
+          <execution>
             <id>enforce-maven</id>
             <goals>
               <goal>enforce</goal>
