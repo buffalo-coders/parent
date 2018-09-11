@@ -29,4 +29,4 @@ install:
 
 .PHONY: deploy
 deploy:
-	@mvn --activate-profiles sonatype-oss-release
+	@mvn --activate-profiles sonatype-oss-release deploy
