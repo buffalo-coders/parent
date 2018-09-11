@@ -127,6 +127,10 @@ under the License.
             </goals>
             <configuration>
               <rules>
+                <requireJavaVersion>
+                  <version>(1.8,)</version>
+                  <message>Current Java required.</message>
+                </requireJavaVersion>
                 <requireMavenVersion>
                   <version>(3.5.0,)</version>
                   <message>Current Apache Maven required.</message>
