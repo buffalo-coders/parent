@@ -9,7 +9,7 @@ pipeline {
     stage ('Preparation') {
       steps {
         checkout scm
-        withMaven() {
+        withMaven(maven: 'default') {
           sh "mvn clean"
         }
       }
@@ -17,7 +17,7 @@ pipeline {
 
     stage ('Unit Test') {
       steps {
-        withMaven() {
+        withMaven(maven: 'default') {
           sh "mvn install"
         }
       }
@@ -25,7 +25,7 @@ pipeline {
 
     stage ('Post Build Cleanup') {
       steps {
-        withMaven() {
+        withMaven(maven: 'default') {
           sh "mvn clean"
         }
       }
