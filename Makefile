@@ -30,3 +30,10 @@ install:
 .PHONY: deploy
 deploy:
 	@mvn --activate-profiles sonatype-oss-release deploy
+
+.PHONY: gpg-init
+gpg-init:
+	$(eval TMP := $(shell mktemp))
+	touch $(TMP)
+	gpg -ab $(TMP)
+	rm $(TMP) $(TMP).asc
