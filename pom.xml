@@ -100,11 +100,27 @@ under the License.
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>1.2</version>
+          <configuration>
+            <rules>
+              <requireJavaVersion>
+                <version>(1.8,)</version>
+                <message>Current Java required.</message>
+              </requireJavaVersion>
+              <requireMavenVersion>
+                <version>(3.5.0,)</version>
+                <message>Current Apache Maven required.</message>
+              </requireMavenVersion>
+            </rules>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
           <version>1.1</version>
+          <configuration>
+            <executable>gpg</executable>
+            <useAgent>true</useAgent>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -120,6 +136,11 @@ under the License.
             <useReleaseProfile>false</useReleaseProfile>
             <arguments>--activate-profiles sonatype-oss-release</arguments>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.2.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -156,29 +177,12 @@ under the License.
         <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
           <execution>
-            <id>display-info</id>
+            <id>environment check</id>
             <phase>validate</phase>
             <goals>
               <goal>display-info</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>enforce-maven</id>
-            <goals>
               <goal>enforce</goal>
             </goals>
-            <configuration>
-              <rules>
-                <requireJavaVersion>
-                  <version>(1.8,)</version>
-                  <message>Current Java required.</message>
-                </requireJavaVersion>
-                <requireMavenVersion>
-                  <version>(3.5.0,)</version>
-                  <message>Current Apache Maven required.</message>
-                </requireMavenVersion>
-              </rules>
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -197,7 +201,6 @@ under the License.
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>sonatype-oss-release</id>
@@ -206,10 +209,6 @@ under the License.
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <configuration>
-              <executable>gpg</executable>
-              <useAgent>true</useAgent>
-            </configuration>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
