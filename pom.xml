@@ -130,11 +130,12 @@ under the License.
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>2.1</version>
+          <version>2.5.3</version>
           <configuration>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
             <mavenExecutorId>forked-path</mavenExecutorId>
             <useReleaseProfile>false</useReleaseProfile>
-            <arguments>--activate-profiles sonatype-oss-release</arguments>
+            <releaseProfiles>sonatype-oss-release</releaseProfiles>
           </configuration>
         </plugin>
         <plugin>
