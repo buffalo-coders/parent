@@ -28,12 +28,21 @@ install:
 	@mvn install
 
 .PHONY: deploy
-deploy:
+deploy: gpg-init
 	@mvn --activate-profiles sonatype-oss-release deploy
 
 .PHONY: gpg-init
 gpg-init:
+	@echo "Setting up GPG."
 	$(eval TMP := $(shell mktemp))
 	touch $(TMP)
 	gpg -ab $(TMP)
 	rm $(TMP) $(TMP).asc
+
+.PHONY: display-updates
+display-updates:
+	@mvn -Dmaven.version.rules=file://$(CURDIR)/src/main/resources/rules.xml \
+		versions:display-dependency-updates \
+		versions:display-parent-updates \
+		versions:display-plugin-updates \
+		versions:display-property-updates
