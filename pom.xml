@@ -55,7 +55,7 @@ under the License.
 
   <scm>
     <connection>scm:git:git://github.com/buffalo-coders/parent.git</connection>
-    <developerConnection>scm:git:ssh://github.com:buffalo-coders/parent.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:buffalo-coders/parent.git</developerConnection>
     <url>http://github.com/buffalo-coders/parent/tree/master</url>
   </scm>
   <distributionManagement>
