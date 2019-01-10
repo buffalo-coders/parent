@@ -36,11 +36,11 @@ display-updates:
 		versions:display-property-updates
 
 .PHONY: fix-pom
-fix-pom:
+fix-pom: no-git-changes
 	@mvn tidy:pom
 
 .PHONY: fix-license
-fix-license:
+fix-license: no-git-changes
 	@mvn license:update-file-header license:update-project-license
 	@mvn -Dlicense.roots=. -Dlicense.includes=pom.xml,Dockerfile,Jenkinsfile,Makefile license:update-file-header
 
@@ -55,3 +55,7 @@ gpg-init:
 .PHONY: install
 install:
 	@mvn install
+
+no-git-changes:
+	@git diff --quiet --exit-code
+	@git diff --quiet --exit-code --cached
