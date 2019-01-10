@@ -35,14 +35,29 @@ display-updates:
 		versions:display-plugin-updates \
 		versions:display-property-updates
 
-.PHONY: fix-pom
-fix-pom: no-git-changes
-	@mvn tidy:pom
+.PHONY: fix
+fix:
+	${MAKE} fix-crlf fix-license fix-notices fix-pom
+
+.PHONY: fix-crlf
+fix-crlf: no-git-changes
+	@mvn --threads 1 --activate-profiles fix-crlf clean
+	-@git commit -a -m 'make fix-crlf'
 
 .PHONY: fix-license
 fix-license: no-git-changes
-	@mvn license:update-file-header license:update-project-license
-	@mvn -Dlicense.roots=. -Dlicense.includes=pom.xml,Dockerfile,Jenkinsfile,Makefile license:update-file-header
+	@mvn --threads 1 --activate-profiles fix-license clean
+	-@git commit -a -m 'make fix-license'
+
+.PHONY: fix-notices
+fix-notices: no-git-changes
+	@mvn --threads 1 --activate-profiles fix-notices clean
+	-@git commit -a -m 'make fix-notices'
+
+.PHONY: fix-pom
+fix-pom: no-git-changes
+	@mvn --threads 1 --activate-profiles fix-pom clean
+	-@git commit -a -m 'make fix-pom'
 
 .PHONY: gpg-init
 gpg-init:

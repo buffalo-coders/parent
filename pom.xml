@@ -99,6 +99,11 @@
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-archetype-plugin</artifactId>
           <version>3.0.1</version>
         </plugin>
@@ -243,6 +248,11 @@
           <version>2.7</version>
         </plugin>
         <plugin>
+          <groupId>org.jasig.maven</groupId>
+          <artifactId>maven-notice-plugin</artifactId>
+          <version>1.1.0</version>
+        </plugin>
+        <plugin>
           <groupId>org.sonatype.plugins</groupId>
           <artifactId>nexus-staging-maven-plugin</artifactId>
           <version>1.6.8</version>
@@ -287,6 +297,114 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>fix-crlf</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <configuration>
+              <target>
+                <fixcrlf eol="unix" srcdir=".">
+                  <include name="**/*.css" />
+                  <include name="**/*.html" />
+                  <include name="**/*.java" />
+                  <include name="**/*.properties" />
+                  <include name="**/*.txt" />
+                  <include name="**/*.xml" />
+                  <exclude name="**/*.class" />
+                  <exclude name="**/*.doc" />
+                  <exclude name="**/*.gif" />
+                  <exclude name="**/*.jpeg" />
+                  <exclude name="**/*.jpg" />
+                  <exclude name="**/*.odp" />
+                  <exclude name="**/*.png" />
+                  <exclude name="**/*.ppt" />
+                </fixcrlf>
+              </target>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>clean</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>fix-license</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>update-file-header</goal>
+                  <goal>update-project-license</goal>
+                </goals>
+                <phase>clean</phase>
+              </execution>
+              <execution>
+                <id>update-file-header-pom</id>
+                <configuration>
+                  <roots>.</roots>
+                  <includes>pom.xml,Dockerfile,Jenkinsfile,Makefile</includes>
+                </configuration>
+                <goals>
+                  <goal>update-file-header</goal>
+                </goals>
+                <phase>clean</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>fix-notices</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jasig.maven</groupId>
+            <artifactId>maven-notice-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <phase>clean</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>fix-pom</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>tidy-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>pom</goal>
+                </goals>
+                <phase>clean</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>sonatype-oss-release</id>
       <build>
