@@ -35,6 +35,10 @@ display-updates:
 		versions:display-plugin-updates \
 		versions:display-property-updates
 
+.PHONY: fix-pom
+fix-pom:
+	@mvn tidy:pom
+
 .PHONY: fix-license
 fix-license:
 	@mvn license:update-file-header license:update-project-license
