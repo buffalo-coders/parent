@@ -131,18 +131,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>1.4.1</version>
-          <configuration>
-            <rules>
-              <requireJavaVersion>
-                <version>(1.8,)</version>
-                <message>Current Java required.</message>
-              </requireJavaVersion>
-              <requireMavenVersion>
-                <version>(3.5.0,)</version>
-                <message>Current Apache Maven required.</message>
-              </requireMavenVersion>
-            </rules>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -208,12 +196,6 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>buildnumber-maven-plugin</artifactId>
           <version>1.4</version>
-          <configuration>
-            <doCheck>false</doCheck>
-            <doUpdate>false</doUpdate>
-            <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-            <revisionOnScmFailure>-1</revisionOnScmFailure>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -271,12 +253,23 @@
         <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
           <execution>
-            <id>environment check</id>
             <phase>validate</phase>
             <goals>
               <goal>display-info</goal>
               <goal>enforce</goal>
             </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>(1.8,)</version>
+                  <message>Current Java required.</message>
+                </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>(3.5.0,)</version>
+                  <message>Current Apache Maven required.</message>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -290,6 +283,12 @@
               <goal>create</goal>
               <goal>create-timestamp</goal>
             </goals>
+            <configuration>
+              <doCheck>false</doCheck>
+              <doUpdate>false</doUpdate>
+              <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+              <revisionOnScmFailure>-1</revisionOnScmFailure>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -345,22 +344,23 @@
             <artifactId>license-maven-plugin</artifactId>
             <executions>
               <execution>
+                <id>update defaults</id>
+                <phase>clean</phase>
                 <goals>
                   <goal>update-file-header</goal>
                   <goal>update-project-license</goal>
                 </goals>
-                <phase>clean</phase>
               </execution>
               <execution>
-                <id>update-file-header-pom</id>
+                <id>update extras</id>
+                <phase>clean</phase>
+                <goals>
+                  <goal>update-file-header</goal>
+                </goals>
                 <configuration>
                   <roots>.</roots>
                   <includes>pom.xml,Dockerfile,Jenkinsfile,Makefile</includes>
                 </configuration>
-                <goals>
-                  <goal>update-file-header</goal>
-                </goals>
-                <phase>clean</phase>
               </execution>
             </executions>
           </plugin>
@@ -376,10 +376,10 @@
             <artifactId>maven-notice-plugin</artifactId>
             <executions>
               <execution>
+                <phase>clean</phase>
                 <goals>
                   <goal>generate</goal>
                 </goals>
-                <phase>clean</phase>
               </execution>
             </executions>
           </plugin>
@@ -395,10 +395,10 @@
             <artifactId>tidy-maven-plugin</artifactId>
             <executions>
               <execution>
+                <phase>clean</phase>
                 <goals>
                   <goal>pom</goal>
                 </goals>
-                <phase>clean</phase>
               </execution>
             </executions>
           </plugin>
@@ -414,7 +414,6 @@
             <artifactId>maven-gpg-plugin</artifactId>
             <executions>
               <execution>
-                <id>sign-artifacts</id>
                 <phase>verify</phase>
                 <goals>
                   <goal>sign</goal>
@@ -427,7 +426,6 @@
             <artifactId>maven-javadoc-plugin</artifactId>
             <executions>
               <execution>
-                <id>attach-javadocs</id>
                 <goals>
                   <goal>jar</goal>
                 </goals>
@@ -439,7 +437,6 @@
             <artifactId>maven-source-plugin</artifactId>
             <executions>
               <execution>
-                <id>attach-sources</id>
                 <goals>
                   <goal>jar-no-fork</goal>
                 </goals>
