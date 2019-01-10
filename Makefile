@@ -23,13 +23,17 @@ default: install
 clean:
 	@mvn clean
 
-.PHONY: install
-install:
-	@mvn install
-
 .PHONY: deploy
 deploy: gpg-init
 	@mvn --activate-profiles sonatype-oss-release deploy
+
+.PHONY: display-updates
+display-updates:
+	@mvn -Dmaven.version.rules=file://$(CURDIR)/src/main/resources/rules.xml \
+		versions:display-dependency-updates \
+		versions:display-parent-updates \
+		versions:display-plugin-updates \
+		versions:display-property-updates
 
 .PHONY: fix-license
 fix-license:
@@ -44,10 +48,6 @@ gpg-init:
 	gpg -ab $(TMP)
 	rm $(TMP) $(TMP).asc
 
-.PHONY: display-updates
-display-updates:
-	@mvn -Dmaven.version.rules=file://$(CURDIR)/src/main/resources/rules.xml \
-		versions:display-dependency-updates \
-		versions:display-parent-updates \
-		versions:display-plugin-updates \
-		versions:display-property-updates
+.PHONY: install
+install:
+	@mvn install
