@@ -12,5 +12,10 @@ specific language governing permissions and limitations
 under the License.
 
 This project includes:
+  Apache Commons Logging under The Apache Software License, Version 2.0
+  JCL 1.2 implemented over SLF4J under MIT License
+  Log4j Implemented Over SLF4J under Apache Software Licenses
   org.buffalo-coders:parent under Apache License, Version 2.0
+  OSGi LogService implemented over SLF4J under MIT License
+  SLF4J API Module under MIT License
 
