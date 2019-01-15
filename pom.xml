@@ -267,9 +267,10 @@
           <version>1.6.8</version>
           <extensions>true</extensions>
           <configuration>
+            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            <description>${project.groupId}:${project.artifactId}:${project.version}</description>
             <serverId>sonatype-nexus-staging</serverId>
             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-            <autoReleaseAfterClose>false</autoReleaseAfterClose>
           </configuration>
         </plugin>
       </plugins>
