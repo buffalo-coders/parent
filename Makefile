@@ -71,6 +71,10 @@ gpg-init:
 install:
 	@mvn install
 
+.PHONY: release
+release: gpg-init no-git-changes
+	@mvn --batch-mode --activate-profiles sonatype-oss-release release:prepare release:perform
+
 no-git-changes:
 	@git diff --quiet --exit-code
 	@git diff --quiet --exit-code --cached
