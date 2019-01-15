@@ -29,7 +29,7 @@ deploy: gpg-init
 
 .PHONY: display-updates
 display-updates:
-	@mvn -Dmaven.version.rules=file://$(CURDIR)/src/main/resources/rules.xml \
+	@mvn -Dmaven.version.rules=https://raw.githubusercontent.com/buffalo-coders/parent/master/src/main/resources/versions-maven-plugin.rules.xml \
 		versions:display-dependency-updates \
 		versions:display-parent-updates \
 		versions:display-plugin-updates \
