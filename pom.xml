@@ -20,12 +20,10 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>org.buffalo-coders</groupId>
   <artifactId>parent</artifactId>
   <version>3-SNAPSHOT</version>
   <packaging>pom</packaging>
-
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Apache Maven parent for our projects.</description>
   <url>http://www-buffalo-coders.org</url>
@@ -41,7 +39,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
   <developers>
     <developer>
       <id>jesse.farinacci</id>
@@ -52,7 +49,6 @@
       <organizationUrl>http://www.buffalo-coders.org</organizationUrl>
     </developer>
   </developers>
-
   <scm>
     <connection>scm:git:git://github.com/buffalo-coders/parent.git</connection>
     <developerConnection>scm:git:git@github.com:buffalo-coders/parent.git</developerConnection>
@@ -71,14 +67,12 @@
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>commons-logging</groupId>
@@ -105,7 +99,6 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
-
   <repositories>
     <repository>
       <id>sonatype-nexus-snapshots</id>
@@ -119,7 +112,6 @@
       </snapshots>
     </repository>
   </repositories>
-
   <build>
     <defaultGoal>verify</defaultGoal>
     <pluginManagement>
@@ -322,7 +314,6 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>fix-crlf</id>
@@ -407,25 +398,6 @@
                 <phase>clean</phase>
                 <goals>
                   <goal>generate</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>fix-pom</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>tidy-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>clean</phase>
-                <goals>
-                  <goal>pom</goal>
                 </goals>
               </execution>
             </executions>
