@@ -22,7 +22,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.buffalo-coders</groupId>
   <artifactId>parent</artifactId>
-  <version>3-SNAPSHOT</version>
+  <version>3</version>
   <packaging>pom</packaging>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Apache Maven parent for our projects.</description>
@@ -53,7 +53,7 @@
     <connection>scm:git:git://github.com/buffalo-coders/parent.git</connection>
     <developerConnection>scm:git:git@github.com:buffalo-coders/parent.git</developerConnection>
     <url>http://github.com/buffalo-coders/parent/tree/master</url>
-    <tag>HEAD</tag>
+    <tag>parent-3</tag>
   </scm>
   <distributionManagement>
     <snapshotRepository>
